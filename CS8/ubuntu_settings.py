@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'Login',
     
 ]
-
+#web: gunicorn gettingstarted.wsgi
 SITE_ID = 1
 
 REST_FRAMEWORK = {
