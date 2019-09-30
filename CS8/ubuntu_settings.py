@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'Login',
     
 ]
-#web: gunicorn gettingstarted.wsgi
+#web: web: gunicorn apisoa.wsgi:application --log-file -
 SITE_ID = 1
 
 REST_FRAMEWORK = {
