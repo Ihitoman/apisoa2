@@ -1,1 +1,1 @@
-web: gunicorn apisoa.wsgi --log-file -
+web: gunicorn CS8.wsgi --log-file -
