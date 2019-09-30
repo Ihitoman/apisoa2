@@ -1,1 +1,1 @@
-web: gunicorn apisoa.wsgi:application --log-file -
+web: gunicorn apisoa.wsgi --log-file -
