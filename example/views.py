@@ -16,7 +16,7 @@ from django.http import Http404
 
 
 
-from example.models import User
+from example.models import User2
 from example.models import Product
 
 from example.models import Transaction
@@ -33,7 +33,31 @@ from example.serializer import InventorySerializer
 from example.serializer import InventoryidSerializer
 from example.serializer import TransactionSerializer
 from example.serializer import SaleSerializer
+
+
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.response import Response
+
 #vistas de extra
+
+class CustomAuthToken(ObtainAuthToken):
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data = request.data,
+        context = {'request':request}) 
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+
+        return Response({
+            'token': token.key,
+            'user_id': user.pk,
+            'username': user.username
+        })
+
+
+
 class ProductsList(APIView):
     
     def get(self, request, format=None):
@@ -44,6 +68,7 @@ class ProductsList(APIView):
     def post(self, request, format=None):
         serializer = ProductSerializer(data = request.data)
         if serializer.is_valid():
+            #print(request.user.id)
             serializer.save()
             datas = serializer.data
             return Response(datas)

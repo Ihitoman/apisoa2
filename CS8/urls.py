@@ -8,7 +8,7 @@ from rest_framework import routers, serializers, viewsets
 class UserSerilizer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('url', 'username', 'email')
+        fields = ( 'username', 'email')
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -27,5 +27,5 @@ urlpatterns = [
     #re_path(r'^api/v1/grupos/', include('example.urls')),
     #re_path(r'^api/v1/materias/', include('example.urls')),
     #re_path(r'^api/v1/profesores/', include('example.urls')),
-    # path(r'^api-auth/', include('rest_framework.urls'))
+    #path(r'^api-auth/', include('rest_framework.urls'))
 ]
