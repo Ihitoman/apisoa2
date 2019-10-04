@@ -33,8 +33,8 @@ class ProductidSerializer(serializers.ModelSerializer):
         fields = ('id')
 
 class InventorySerializer(serializers.ModelSerializer):
-    #usuarioI = UseridSerializer(many=True)
-    #productoI = ProductidSerializer(many=True)
+    usuarioI = UseridSerializer(many=True)
+    productoI = ProductidSerializer(many=True)
     class Meta:
         model = Inventory
         fields = ('__all__')

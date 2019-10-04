@@ -31,10 +31,10 @@ class Product(models.Model):
         db_table = "products"
 
 class Inventory(models.Model):
-    product_id= models.ForeignKey(Product, on_delete=models.SET(-1))#, related_name='productoI'
+    product_id= models.ForeignKey(Product, on_delete=models.SET(-1), related_name='productoI')#, related_name='productoI'
     quantity = models.IntegerField(null=False)
     price = models.FloatField(null=False)
-    user_id = models.ForeignKey(User, on_delete=models.SET(-1))#, related_name='usuarioI'
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1), related_name='usuarioI')#, related_name='usuarioI'
     tax = models.FloatField(null=False)
 
     class Meta:
