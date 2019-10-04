@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
+    #'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
     'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 100
@@ -73,7 +73,7 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'CS8.urls'
-
+#IsAuthenticated
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -101,13 +101,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd7ue60mlsd13ah',
         'USER': 'tqmpiqohbmjepf',
-        'PASSWORD': 'b255c67187d5ac9ca6932fefea1590c3c56cce45d3fe508b7cdccb43cbf23125',
+        'PASSWORD': 'b255c67187d5ac9ca6932fefea1590c3c56cce45d3fe508b7cdccb43cbf23125',        
         'HOST':'ec2-174-129-27-3.compute-1.amazonaws.com',
         #'NAME': 'soadj',
         #'USER': 'postgres',
         #'PASSWORD': '1234',
         #'HOST':'localhost',
-        #'PORT':'5432'
+        'PORT':'5432'
     }
 }
 
