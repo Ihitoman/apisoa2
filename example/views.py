@@ -13,7 +13,7 @@ from django.http import Http404
 
 
 
-
+#IsAuthenticated
 
 
 from example.models import User2
@@ -56,13 +56,13 @@ class CustomAuthToken(ObtainAuthToken):
             'username': user.username
         })
 
-
+#delete
 
 class ProductsList(APIView):
     
     def get(self, request, format=None):
         print("llegoooooooooooooooooooooooo")
-        queryset = Product.objects.filter(delete=False)
+        queryset = Product.objects.all()
         print("1111111111111111111111111111111111111")
         serializer = ProductSerializer(queryset, many=True)
         print("salioooooooooooooooooooooo")
@@ -81,7 +81,7 @@ class ProductsList(APIView):
 class ProductDetail(APIView):
     def get_object(self, id):
         try:
-            return Product.objects.get(pk=id, delete=False)
+            return Product.objects.get(pk=id)
         except Product.DoesNotExist:
             return False
     
@@ -115,7 +115,7 @@ class ProductDetail(APIView):
 class UsersList(APIView):
     
     def get(self, request, format=None):
-        queryset = User.objects.filter(delete=False)
+        queryset = User.objects.all()
         serializer = UserSerializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -131,7 +131,7 @@ class UsersList(APIView):
 class UserDetail(APIView):
     def get_object(self, id):
         try:
-            return User.objects.get(pk=id, delete=False)
+            return User.objects.get(pk=id)
         except User.DoesNotExist:
             return False
     
@@ -165,7 +165,7 @@ class UserDetail(APIView):
 class InventoriesList(APIView):
     
     def get(self, request, format=None):
-        queryset = Inventory.objects.filter(delete=False)
+        queryset = Inventory.objects.all()
         serializer = InventoriesList(queryset, many=True)
         return Response(serializer.data)
     
@@ -181,7 +181,7 @@ class InventoriesList(APIView):
 class InventoriesDetail(APIView):
     def get_object(self, id):
         try:
-            return Inventory.objects.get(pk=id, delete=False)
+            return Inventory.objects.get(pk=id)
         except Inventory.DoesNotExist:
             return False
     
@@ -215,7 +215,7 @@ class InventoriesDetail(APIView):
 class TransactionsList(APIView):
     
     def get(self, request, format=None):
-        queryset = Transaction.objects.filter(delete=False)
+        queryset = Transaction.objects.all()
         serializer = TransactionSerializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -231,7 +231,7 @@ class TransactionsList(APIView):
 class TransactionDetail(APIView):
     def get_object(self, id):
         try:
-            return Transaction.objects.get(pk=id, delete=False)
+            return Transaction.objects.get(pk=id)
         except Transaction.DoesNotExist:
             return False
     
@@ -265,7 +265,7 @@ class TransactionDetail(APIView):
 class SalesList(APIView):
     
     def get(self, request, format=None):
-        queryset = Sale.objects.filter(delete=False)
+        queryset = Sale.objects.all()
         serializer = SaleSerializer(queryset, many=True)
         return Response(serializer.data)
     
@@ -281,7 +281,7 @@ class SalesList(APIView):
 class SaleDetail(APIView):
     def get_object(self, id):
         try:
-            return Sale.objects.get(pk=id, delete=False)
+            return Sale.objects.get(pk=id)
         except Sale.DoesNotExist:
             return False
     
