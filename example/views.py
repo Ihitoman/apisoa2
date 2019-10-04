@@ -61,8 +61,11 @@ class CustomAuthToken(ObtainAuthToken):
 class ProductsList(APIView):
     
     def get(self, request, format=None):
+        print("llegoooooooooooooooooooooooo")
         queryset = Product.objects.filter(delete=False)
+        print("1111111111111111111111111111111111111")
         serializer = ProductSerializer(queryset, many=True)
+        print("salioooooooooooooooooooooo")
         return Response(serializer.data)
     
     def post(self, request, format=None):

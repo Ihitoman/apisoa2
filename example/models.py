@@ -22,7 +22,7 @@ class User2(models.Model):
 
 class Product(models.Model):
     code = models.CharField(max_length=30, null=False, unique=True)
-    name = models.CharField(max_length=30, default=False)
+    name = models.CharField(max_length=30, default=False, null=False)
     description = models.CharField(max_length = 255, null = False)
     image = models.CharField(max_length=150, null=False)
     status = models.IntegerField(null=True)

@@ -1,6 +1,8 @@
 from rest_framework import routers, serializers
 
-from example.models import User
+from django.contrib.auth.models import User
+
+from example.models import User2
 from example.models import Product
 
 from example.models import Inventory
@@ -9,7 +11,7 @@ from example.models import Transaction
 from example.models import Sale
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('__all__')
@@ -20,7 +22,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 
 
-class UseridSerializer(serializers.ModelSerializer):
+class UseridSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('id')
