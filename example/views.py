@@ -122,7 +122,9 @@ class UsersList(APIView):
     def post(self, request, format=None):
         serializer = UserSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.save()
+            user = User.objects.create_user(request.data)
+            user.save()
+            #serializer.save()
             datas = serializer.data
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
