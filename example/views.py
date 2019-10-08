@@ -71,6 +71,7 @@ class ProductsList(APIView):
             product_id = postProduct.id,
             user_id = request.data['user_id']
         )
+        postInventario.save()
         return Response(postInventario.id)
 #datas= postProduct.data
 #serializer = ProductSerializer(data = request.data)
