@@ -61,7 +61,7 @@ class ProductsList(APIView):
         description =request.data['description']
         image = request.data['image']
         status =  request.data['status']
-        serializer = ProductSerializer(data =  'code':code, 'name':name, 'description':description, 'image': image, 'status':status)
+        serializer = ProductSerializer(data =  json.dumps({'code':code, 'name':name, 'description':description, 'image': image, 'status':status}))
         if serializer.is_valid():
             #print(request.user.id)
             serializer.save()
