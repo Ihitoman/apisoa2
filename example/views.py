@@ -63,15 +63,21 @@ class ProductsList(APIView):
             image = request.data['image'],
             status = request.data['status']
         )
+        print('antttesss PPPP')
         postProduct.save()
+        id = request.data['user_id']
+        print('despuesssss pppp' )
+        print(id)
         postInventario = Inventory.objects.create(
             quantity = request.data['quantity'],
             price = request.data['price'],
-            tax = request.tax['tax'],
-            product_id = postProduct.id,
-            user_id = request.data['user_id']
+            tax = request.data['tax'],
+            product_id = postProduct,
+            user_id = User.objects.get(pk=id)
         )
+        print('antessssss IIIII')
         postInventario.save()
+        print('despuessss iiiiiiii')
         return Response(postInventario.id)
 #datas= postProduct.data
 #serializer = ProductSerializer(data = request.data)
