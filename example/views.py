@@ -75,6 +75,12 @@ class ProductsList(APIView):
             product_id = postProduct,
             user_id = User.objects.get(pk=id)
         )
+        postTransaction = Transaction.objects.create(
+            date = request.data['date'],
+            typee = 1,
+            inventory_id = postInventario
+        )
+        postTransaction.save()
         print('antessssss IIIII')
         postInventario.save()
         print('despuessss iiiiiiii')
