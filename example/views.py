@@ -72,7 +72,7 @@ class ProductsList(APIView):
             product_id = postProduct.id,
             user_id = request.user.id
         )
-        return Response(postProduct.id, postInventario.id)
+        return Response(postInventario.id)
 #serializer = ProductSerializer(data = request.data)
         
 #if serializer.is_valid():
