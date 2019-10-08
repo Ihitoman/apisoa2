@@ -65,7 +65,7 @@ class ProductsList(APIView):
         )
         postProduct.save()
         #datas= postProduct.data
-        return Response(data =request.data)
+        return Response(postProduct)
 #serializer = ProductSerializer(data = request.data)
         
 #if serializer.is_valid():
