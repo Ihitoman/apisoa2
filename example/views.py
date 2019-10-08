@@ -70,7 +70,7 @@ class ProductsList(APIView):
             price = request.data['price'],
             tax = request.tax['tax'],
             product_id = postProduct.id,
-            user_id = request.user.id
+            user_id = request.data['user_id']
         )
         return Response(postInventario.id)
 #serializer = ProductSerializer(data = request.data)
