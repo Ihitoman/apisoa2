@@ -22,7 +22,7 @@ from example.models import Product
 from example.models import Transaction
 from example.models import Sale
 
-from example.serializer import Inventory
+from example.models import Inventory
 
 
 from example.serializer import UserSerializer
