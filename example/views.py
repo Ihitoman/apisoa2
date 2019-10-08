@@ -65,7 +65,14 @@ class ProductsList(APIView):
         )
         postProduct.save()
         #datas= postProduct.data
-        return Response(postProduct.id)
+        postInventario = Inventory.objects.create(
+            quantity = request.data['quantity'],
+            price = request.data['price'],
+            tax = request.tax['tax'],
+            product_id = postProduct.id,
+            user_id = request.user.id
+        )
+        return Response(postProduct.id, postInventario.id)
 #serializer = ProductSerializer(data = request.data)
         
 #if serializer.is_valid():
