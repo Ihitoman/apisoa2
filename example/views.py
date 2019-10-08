@@ -56,7 +56,7 @@ class ProductsList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        postProduct = Product.objects.create(
+        postProduct = ProductSerializer.objects.create(
             code = request.data['code'],
             name = request.data['name'],
             description = request.data['description'],
@@ -65,7 +65,7 @@ class ProductsList(APIView):
         )
         postProduct.save()
         #datas= postProduct.data
-        return Response(postProduct)
+        return Response(data = postProduct.data)
 #serializer = ProductSerializer(data = request.data)
         
 #if serializer.is_valid():
