@@ -56,18 +56,21 @@ class ProductsList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        code = request.data['code']
-        name = request.data['name']
-        description =request.data['description']
-        image = request.data['image']
-        status =  request.data['status']
-        serializer = ProductSerializer(data =  json.dumps({'code':code, 'name':name, 'description':description, 'image': image, 'status':status}))
-        if serializer.is_valid():
+        postProduct = Product.objects.create(
+            code = request.data['code'],
+            name = request.data['name'],
+            description =request.data['description'],
+            image = request.data['image'],
+            status =  request.data['status']
+        )
+        postProduct.save()
+        #serializer = ProductSerializer(data =  json.dumps({'code':code, 'name':name, 'description':description, 'image': image, 'status':status}))
+        #if serializer.is_valid():
             #print(request.user.id)
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        #serializer.save()
+        datas = postProduct.data
+        return Response(datas)
+        #return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
 class ProductDetail(APIView):
