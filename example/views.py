@@ -41,20 +41,7 @@ from rest_framework.response import Response
 
 #vistas de extra
 
-class CustomAuthToken(ObtainAuthToken):
-    
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data = request.data,
-        context = {'request':request}) 
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
 
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'username': user.username
-        })
 
 #delete
 
@@ -69,7 +56,7 @@ class ProductsList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = ProductSerializer(data = request.data)
+        serializer = ProductSerializer(data = request.data.code, request.data.name, request.data.description, request.data.image, request.data.status)
         if serializer.is_valid():
             #print(request.user.id)
             serializer.save()
