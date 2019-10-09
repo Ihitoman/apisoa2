@@ -49,7 +49,7 @@ class ProductsList(APIView):
     
     def get(self, request, format=None):
         print("llegoooooooooooooooooooooooo")
-        queryset = Product.objects.all()
+        queryset = Product.objects.filter(status = 1)
         print("1111111111111111111111111111111111111")
         serializer = ProductSerializer(queryset, many=True)
         print("salioooooooooooooooooooooo")
@@ -290,12 +290,36 @@ class SalesList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = SaleSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        id = request.data['product_id']
+        inventario = Inventory.objects.get(product_id = id)
+        cantidad = request.data['quantity']
+        cantidadD = inventario.quantity
+        if cantidadD - cantidad >= 0:
+            venta = Sale.objects.create(
+                quantity = cantidad,
+                discount = request.data['discount'],
+                total = request.data['total'],
+                date = request.data['date'],
+                status = request.data['status'],
+                paymaneth_method = request.data['paymaneth_method'],
+                product_id = Product.objects.get(pk = id),
+                user_id = User.objects.get(pk=request.data['user_id'])
+            )
+            venta.save()
+            transaccion =Transaction.objects.create(
+                date = request.data['date'],
+                type = 2,
+                user_id = User.objects.get(pk=request.data['user_id']) 
+            ) 
+            transaccion.save()
+            return Response('exitoso')
+        return Response('error')
+        # serializer = SaleSerializer(data = request.data)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     datas = serializer.data
+        #     return Response(datas)
+        # return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
 class SaleDetail(APIView):
