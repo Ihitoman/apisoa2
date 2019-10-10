@@ -45,6 +45,47 @@ from rest_framework.response import Response
 
 #delete
 
+
+class ProductListAll(APIView):
+    def get(self, request, format=None):
+        queryset = Product.objects.all()
+        serializer = ProductSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+class ProductDetail(APIView):
+    def get_object(self, id):
+        try:
+            return Product.objects.get(pk=id)
+        except Product.DoesNotExist:
+            return False
+    
+    def get(self, request, id, format=None):
+        example = self.get_object(id)
+        if example != False:
+            serializer = ProductSerializer(example)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        Product.objects.get(pk=id).delete()
+        return Response("ok")
+    
+    def put(self, request, id, format=None):
+        example = self.get_object(id)
+        if example != False:
+            serializer = ProductSerializer(example, data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                datas = serializer.data
+                return Response(datas)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 class ProductsList(APIView):
     
     def get(self, request, format=None):
@@ -94,46 +135,6 @@ class ProductsList(APIView):
 #    datas = serializer.data
         
 #return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-class ProductListAll(APIView):
-    def get(self, request, format=None):
-        queryset = Product.objects.all()
-        serializer = ProductSerializer(queryset, many=True)
-        return Response(serializer.data)
-
-
-class ProductDetail(APIView):
-    def get_object(self, id):
-        try:
-            return Product.objects.get(pk=id)
-        except Product.DoesNotExist:
-            return False
-    
-    def get(self, request, id, format=None):
-        example = self.get_object(id)
-        if example != False:
-            serializer = ProductSerializer(example)
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, id, format=None):
-        Product.objects.get(pk=id).delete()
-        return Response("ok")
-    
-    def put(self, request, id, format=None):
-        example = self.get_object(id)
-        if example != False:
-            serializer = ProductSerializer(example, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                datas = serializer.data
-                return Response(datas)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
-
 
 class CancelSale(APIView):
     def put(self, request, id, format=None):
@@ -201,23 +202,7 @@ class UserDetail(APIView):
 
 #////////////////////////////////////////////////////////////////////////////////////////////////
 
-class InventoriesList(APIView):
-    
-    def get(self, request, format=None):
-        queryset = Inventory.objects.all()
-        serializer = InventorySerializer(queryset, many=True)
-        return Response(serializer.data)
-    
-    def post(self, request, format=None):
-        serializer = InventorySerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            datas = serializer.data
-            return Response(datas)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-
-class InventoriesDetail(APIView):
     def get_object(self, id):
         try:
             return Inventory.objects.get(pk=id)
@@ -300,6 +285,24 @@ class TransactionDetail(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 #////////////////////////////////////////////////////////////////////////////////////
+
+class InventoriesList(APIView):
+    
+    def get(self, request, format=None):
+        queryset = Inventory.objects.all()
+        serializer = InventorySerializer(queryset, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request, format=None):
+        serializer = InventorySerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+class InventoriesDetail(APIView):
 
 class SalesList(APIView):
     
