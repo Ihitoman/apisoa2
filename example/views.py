@@ -153,11 +153,11 @@ class UsersList(APIView):
     
     def get(self, request, format=None):
         queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
+        serializer = UserSerializer(queryset, context={'request': request}, many=True)
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        serializer = UserSerializer(data = request.data)
+        serializer = UserSerializer(data = request.data, context={'request': request})
         if serializer.is_valid():
             user = User.objects.create_user(request.data)
             user.save()
