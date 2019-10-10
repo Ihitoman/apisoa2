@@ -95,6 +95,12 @@ class ProductsList(APIView):
         
 #return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+class ProductListAll(APIView):
+    def get(self, request, format=None):
+        queryset = Product.objects.all()
+        serializer = ProductSerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class ProductDetail(APIView):
     def get_object(self, id):
