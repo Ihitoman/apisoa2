@@ -20,6 +20,7 @@ urlpatterns = [
      #re_path(r'^grupos_profesores/(?P<id>\d+)$', views.GruposPPDetail.as_view() ),
      #re_path(r'^grupos_alumno/(?P<id>\d+)$', views.GruposPDetail.as_view() ),
      
+
      re_path(r'^users_lista/$', views.UsersList.as_view() ),
      re_path(r'^users_detail/(?P<id>\d+)$', views.UserDetail.as_view() ),
      
@@ -31,4 +32,5 @@ urlpatterns = [
 
      re_path(r'^sales_lista/$', views.SalesList.as_view() ),
      re_path(r'^sales_detail/(?P<id>\d+)$', views.SaleDetail.as_view() ),
+     re_path(r'^canselar_venta/$', views.CancelSale.as_view() ),
 ]

@@ -134,6 +134,19 @@ class ProductDetail(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+class CancelSale(APIView):
+    def put(self, request, id, format=None):
+        example = self.get_object(id)
+        if example != False:
+            venta = Sale.objects.get(pk=id)
+            venta.status = 0
+            venta.save()
+            inventario = Inventory.objects.get(product_id = venta.product_id)
+            inventario.quantity = inventario.quantity + venta.quantity
+            inventario.save()
+            return Response('Guardado')
+
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 class UsersList(APIView):
@@ -300,7 +313,9 @@ class SalesList(APIView):
         inventario = Inventory.objects.get(product_id = id)
         cantidad = request.data['quantity']
         cantidadD = inventario.quantity
-        if cantidadD - cantidad >= 0:
+        print(cantidad)
+        print(cantidadD)
+        if int(cantidadD) - int(cantidad) >= 0:
             venta = Sale.objects.create(
                 quantity = cantidad,
                 discount = request.data['discount'],
@@ -311,11 +326,13 @@ class SalesList(APIView):
                 product_id = Product.objects.get(pk = id),
                 user_id = User.objects.get(pk=request.data['user_id'])
             )
+            inventario.quantity = int(cantidadD) - int(cantidad)
+            inventario.save()
             venta.save()
             transaccion =Transaction.objects.create(
                 date = request.data['date'],
-                type = 2,
-                user_id = User.objects.get(pk=request.data['user_id']) 
+                typee = 2,
+                inventory_id = inventario
             ) 
             transaccion.save()
             return Response('exitoso')
