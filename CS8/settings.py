@@ -78,12 +78,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST={
-    'google.com',
-    'localhost:8080',
-    '127.0.0.1:9000',
-    '*'
-}
+
 
 ROOT_URLCONF = 'CS8.urls'
 
