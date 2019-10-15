@@ -68,6 +68,7 @@ CORS_ALLOW_METHODS = (
 )
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,6 +78,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ORIGIN_WHITELIST={
+    'google.com',
+    'localhost:8000',
+    '127.0.0.1:9000'
+}
 
 ROOT_URLCONF = 'CS8.urls'
 
