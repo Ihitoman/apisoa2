@@ -49,7 +49,7 @@ class ProductsList(APIView):
     
     def get(self, request, format=None):
         print("llegoooooooooooooooooooooooo")
-        queryset = Product.objects.filter(status = 1)
+        queryset = Product.objects.filter(status = 'available')
         print("1111111111111111111111111111111111111")
         serializer = ProductSerializer(queryset, many=True)
         print("salioooooooooooooooooooooo")
