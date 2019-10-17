@@ -379,7 +379,7 @@ class SalesList(APIView):
             venta.save()
             transaccion =Transaction.objects.create(
                 date = request.data['date'],
-                typee = 2,
+                typee = "substraction",
                 inventory_id = inventario
             ) 
             transaccion.save()
