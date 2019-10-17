@@ -42,9 +42,10 @@ class InventorySerializer(serializers.ModelSerializer):
 class InventoryviewSerializer(serializers.ModelSerializer):
     usuario = serializers.ReadOnlyField(source='user_id.username')#UseridSerializer(many=True, read_only=True)
     producto = serializers.ReadOnlyField(source='product_id.name')#ProductnameSerializer(many=True, read_only=True)
+    code = serializers.ReadOnlyField(source='product_id.code')
     class Meta:
         model = Inventory
-        fields = ('price', 'tax', 'quantity', 'usuario', 'producto')
+        fields = ('__all__')
         #fields = ('__all__')
 
 class TransactionviewSerializer(serializers.ModelSerializer):
