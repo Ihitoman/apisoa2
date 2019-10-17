@@ -31,17 +31,17 @@ class Product(models.Model):
         db_table = "products"
 
 class Inventory(models.Model):
-    product_id= models.ForeignKey(Product, on_delete=models.SET(-1), related_name='producto')#, related_name='productoI'
+    product_id= models.ForeignKey(Product, on_delete=models.SET(-1))#, related_name='productoI'
     quantity = models.IntegerField(null=False)
     price = models.FloatField(null=False)
-    user_id = models.ForeignKey(User, on_delete=models.SET(-1), related_name='usuario')#, related_name='usuarioI'
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1))#, related_name='usuarioI'
     tax = models.FloatField(null=False)
 
     class Meta:
         db_table = "inventories"
 
 class Transaction(models.Model):
-    inventory_id = models.ForeignKey(Inventory, on_delete=models.SET(-1), related_name='inventario')#, related_name='inventario'
+    inventory_id = models.ForeignKey(Inventory, on_delete=models.SET(-1))#, related_name='inventario'
     date = models.DateField(null=False)
     typee = models.CharField(max_length=30, null=False)
 
