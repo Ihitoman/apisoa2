@@ -78,7 +78,7 @@ class ProductsList(APIView):
         )
         postTransaction = Transaction.objects.create(
             date = request.data['date'],
-            typee = 1,
+            typee = "add",
             inventory_id = postInventario
         )
         postTransaction.save()
