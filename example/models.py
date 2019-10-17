@@ -25,37 +25,37 @@ class Product(models.Model):
     name = models.CharField(max_length=30, default=False, null=False)
     description = models.CharField(max_length = 255, null = False)
     image = models.CharField(max_length=150, null=False)
-    status = models.IntegerField(null=True)
+    status = models.CharField(max_length=30, null=True)
 
     class Meta:
         db_table = "products"
 
 class Inventory(models.Model):
-    product_id= models.ForeignKey(Product, on_delete=models.SET(-1))#, related_name='productoI'
+    product_id= models.ForeignKey(Product, on_delete=models.SET(-1), related_name='producto')#, related_name='productoI'
     quantity = models.IntegerField(null=False)
     price = models.FloatField(null=False)
-    user_id = models.ForeignKey(User, on_delete=models.SET(-1))#, related_name='usuarioI'
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1), related_name='usuario')#, related_name='usuarioI'
     tax = models.FloatField(null=False)
 
     class Meta:
         db_table = "inventories"
 
 class Transaction(models.Model):
-    inventory_id = models.ForeignKey(Inventory, on_delete=models.SET(-1))#, related_name='inventario'
+    inventory_id = models.ForeignKey(Inventory, on_delete=models.SET(-1), related_name='inventario')#, related_name='inventario'
     date = models.DateField(null=False)
-    typee = models.IntegerField(null=False)
+    typee = models.CharField(max_length=30, null=False)
 
     class Meta:
         db_table = "transactions"
 
 class Sale(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.SET(-1))#, related_name='productS'
-    user_id = models.ForeignKey(User, on_delete=models.SET(-1))#, related_name='userSe'
+    product_id = models.ForeignKey(Product, on_delete=models.SET(-1), related_name='productS')#, related_name='productS'
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1), related_name='userSe')#, related_name='userSe'
     quantity = models.IntegerField(null=False)
     discount = models.FloatField(null=False )
     total = models.FloatField(null=False)
     date = models.DateField(null=False)
-    status = models.IntegerField(null=False)
+    status = models.CharField(max_length=30, null=False)
     paymaneth_method=models.IntegerField(null=False)
 
     class Meta:

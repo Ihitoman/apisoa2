@@ -25,12 +25,12 @@ class ProductSerializer(serializers.ModelSerializer):
 class UseridSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('id')
+        fields = ('username')
 
-class ProductidSerializer(serializers.ModelSerializer):
+class ProductnameSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('id')
+        fields = ('name')
 
 class InventorySerializer(serializers.ModelSerializer):
     #usuarioI = UseridSerializer(many=True)
@@ -38,6 +38,15 @@ class InventorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
         fields = ('__all__')
+
+class InventoryviewSerializer(serializers.ModelSerializer):
+    usuario = UseridSerializer(many=True, read_only=True)
+    producto = ProductnameSerializer(many=True, read_only=True)
+    class Meta:
+        model = Inventory
+        fields = ('quantity', 'usuario', 'producto')
+        #fields = ('__all__')
+
 
 class InventoryidSerializer(serializers.ModelSerializer):
     class Meta:

@@ -24,11 +24,11 @@ from example.models import Sale
 
 from example.models import Inventory
 
-
+from example.serializer import InventoryviewSerializer
 from example.serializer import UserSerializer
 from example.serializer import ProductSerializer
 from example.serializer import UseridSerializer
-from example.serializer import ProductidSerializer
+from example.serializer import ProductnameSerializer
 from example.serializer import InventorySerializer
 from example.serializer import InventoryidSerializer
 from example.serializer import TransactionSerializer
@@ -246,6 +246,30 @@ class InventoriesDetail(APIView):
                 return Response(datas)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class InventorytListAll(APIView):
+    def get(self, request, format=None):
+        queryset = Inventory.objects.all()
+        serializer = InventoryviewSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class InventoriesviewDetail(APIView):
+    def get_object(self, id):
+        try:
+            return Inventory.objects.get(pk=id)
+        except Inventory.DoesNotExist:
+            return False
+    
+    def get(self, request, id, format=None):
+        example = self.get_object(id)
+        print(self)
+        if example != False:
+            serializer = InventoryviewSerializer(example)
+            print(serializer.data)
+            return Response(serializer.data)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
