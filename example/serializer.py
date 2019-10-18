@@ -44,6 +44,7 @@ class InventoryviewSerializer(serializers.ModelSerializer):
     producto = serializers.ReadOnlyField(source='product_id.name')#ProductnameSerializer(many=True, read_only=True)
     code = serializers.ReadOnlyField(source='product_id.code')
     status = serializers.ReadOnlyField(source='product_id.status')
+    description = serializers.ReadOnlyField(source='product_id.description')
     class Meta:
         model = Inventory
         fields = ('__all__')
