@@ -159,11 +159,10 @@ class UsersList(APIView):
         return Response(serializer.data)
     
     def post(self, request, format=None):
-        var = False
         serializer = UserSerializer(data = request.data, context={'request': request})
         if serializer.is_valid():
-            user = User.objects.create_user(request.data['username'], '', request['password'])
-            if var:
+            user = User.objects.create_user(request.data['username'], '', request.data['password'])
+            if request.data['is_superuser'] == 'true':
                 user.is_superuser = True
             else:
                 user.is_superuser = False
