@@ -77,7 +77,7 @@ class ProductsList(APIView):
             user_id = User.objects.get(pk=id)
         )
         postTransaction = Transaction.objects.create(
-            date = '2019-10-17',
+            date = '2019-10-18',
             typee = "add",
             inventory_id = postInventario
         )
