@@ -287,7 +287,7 @@ class InventoriesPviewDetail(APIView):
             return False
     
     def get(self, request, id, format=None):
-        example = self.get_object(id)
+        example = self.get_object(product_id=id)
         print(self)
         if example != False:
             serializer = InventoryviewSerializer(example)
