@@ -34,6 +34,7 @@ from example.serializer import InventoryidSerializer
 from example.serializer import TransactionSerializer
 from example.serializer import SaleSerializer
 from example.serializer import TransactionviewSerializer
+from example.serializer import SalesviewSerializer
 
 
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -391,6 +392,13 @@ class SalesList(APIView):
         #     datas = serializer.data
         #     return Response(datas)
         # return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+class SalesviewList(APIView):
+    
+    def get(self, request, format=None):
+        queryset = Sale.objects.all()
+        serializer = SalesviewSerializer(queryset, many=True)
+        return Response(serializer.data)
 
 
 class SaleDetail(APIView):
