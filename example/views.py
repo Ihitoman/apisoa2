@@ -222,6 +222,12 @@ class InventoriesList(APIView):
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
+class InventoriesFList(APIView):    
+    def get(self, request, format=None):
+        queryset = Inventory.objects.filter(product_id.status = 'available')
+        serializer = InventorySerializer(queryset, many=True)
+        return Response(serializer.data)
+
 
 class InventoriesDetail(APIView):
     def get_object(self, id):
