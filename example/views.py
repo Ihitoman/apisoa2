@@ -162,7 +162,10 @@ class UsersList(APIView):
         serializer = UserSerializer(data = request.data, context={'request': request})
         if serializer.is_valid():
             user = User.objects.create_user(request.data['username'], '', request['password'])
-            user.is_superuser = request.data['is_superuser']
+            if request.data['is_superuser'] == 'true':
+                user.is_superuser = True
+            else:
+                user.is_superuser = False
             user.save()
             #serializer.save()
             datas = serializer.data
