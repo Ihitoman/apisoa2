@@ -49,8 +49,8 @@ class Transaction(models.Model):
         db_table = "transactions"
 
 class Sale(models.Model):
-    product_id = models.ForeignKey(Product, on_delete=models.SET(-1), related_name='productS')#, related_name='productS'
-    user_id = models.ForeignKey(User, on_delete=models.SET(-1), related_name='userSe')#, related_name='userSe'
+    product_id = models.ForeignKey(Product, on_delete=models.SET(-1))#, related_name='productS'
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1))#, related_name='userSe'
     quantity = models.IntegerField(null=False)
     discount = models.FloatField(null=False )
     total = models.FloatField(null=False)

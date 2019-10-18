@@ -11,7 +11,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.http import Http404
 
-
+import time
 
 #IsAuthenticated
 
@@ -77,7 +77,7 @@ class ProductsList(APIView):
             user_id = User.objects.get(pk=id)
         )
         postTransaction = Transaction.objects.create(
-            date = request.data['date'],
+            date = '2019-10-17',
             typee = "add",
             inventory_id = postInventario
         )

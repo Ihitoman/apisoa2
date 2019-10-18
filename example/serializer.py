@@ -54,6 +54,14 @@ class TransactionviewSerializer(serializers.ModelSerializer):
         model = Transaction
         fields = ('__all__')
 
+
+class SalesviewSerializer(serializers.ModelSerializer):
+    usuario = serializers.ReadOnlyField(source='user_id.username')
+    producto = serializers.ReadOnlyField(source='product_id.name')
+    class Meta:
+        model = Sale
+        fields = ('__all__')
+        
 class InventoryidSerializer(serializers.ModelSerializer):
     class Meta:
         model = Inventory
