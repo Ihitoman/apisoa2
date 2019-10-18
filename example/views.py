@@ -375,7 +375,7 @@ class SalesList(APIView):
                 quantity = cantidad,
                 discount = request.data['discount'],
                 total = request.data['total'],
-                date = request.data['date'],
+                date = '2019-10-18',
                 status = request.data['status'],
                 paymaneth_method = request.data['paymaneth_method'],
                 product_id = Product.objects.get(pk = id),
