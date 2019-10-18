@@ -28,7 +28,7 @@ urlpatterns = [
      re_path(r'^inventario_lista/$', views.InventoriesList.as_view() ),
      re_path(r'^inventario_detail/(?P<id>\d+)$', views.InventoriesDetail.as_view() ),
      re_path(r'^inventariod_view/(?P<id>\d+)$', views.InventoriesviewDetail.as_view() ),
-      re_path(r'^inventariodPview/(?P<id>\d+)$', views.InventoriesPviewDetail.as_view() ),
+     #re_path(r'^inventariodPview/(?P<id>\d+)$', views.InventoriesPviewDetail.as_view() ),
 
      re_path(r'^transaccion_lista/$', views.TransactionsList.as_view() ),
      re_path(r'^transaccionview/$', views.TransactiontListAll.as_view() ),
