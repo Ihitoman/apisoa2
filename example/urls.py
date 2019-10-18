@@ -18,7 +18,7 @@ urlpatterns = [
      re_path(r'^detalle_producto/(?P<id>\d+)$', views.ProductDetail.as_view() ),
      re_path(r'^inventarioview/$', views.InventorytListAll.as_view() ),
      #re_path(r'^grupos_profesores/(?P<id>\d+)$', views.GruposPPDetail.as_view() ),
-     #re_path(r'^grupos_alumno/(?P<id>\d+)$', views.GruposPDetail.as_view() ),  SalesviewList
+     #re_path(r'^grupos_alumno/(?P<id>\d+)$', views.GruposPDetail.as_view() ),  InventoriesPviewDetail
      
 
      re_path(r'^users_lista/$', views.UsersList.as_view() ),
@@ -27,6 +27,7 @@ urlpatterns = [
      re_path(r'^inventario_lista/$', views.InventoriesList.as_view() ),
      re_path(r'^inventario_detail/(?P<id>\d+)$', views.InventoriesDetail.as_view() ),
      re_path(r'^inventariod_view/(?P<id>\d+)$', views.InventoriesviewDetail.as_view() ),
+      re_path(r'^inventariodPview/(?P<id>\d+)$', views.InventoriesPviewDetail.as_view() ),
 
      re_path(r'^transaccion_lista/$', views.TransactionsList.as_view() ),
      re_path(r'^transaccionview/$', views.TransactiontListAll.as_view() ),
