@@ -258,7 +258,7 @@ class InventoriesDetail(APIView):
 
 class InventorytListAll(APIView):
     def get(self, request, format=None):
-        queryset = Inventory.objects.all()
+        queryset = Inventory.objects.filter(product_id__status = 'available')
         serializer = InventoryviewSerializer(queryset, many=True)
         return Response(serializer.data)
 
