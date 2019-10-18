@@ -14,6 +14,7 @@ urlpatterns = [
      
      #urls extra
      re_path(r'^lista_productos/$', views.ProductsList.as_view() ),
+     re_path(r'^listaiproductos/$', views.InventoriesFList.as_view() ),
      re_path(r'^lista_productosall/$', views.ProductListAll.as_view() ),
      re_path(r'^detalle_producto/(?P<id>\d+)$', views.ProductDetail.as_view() ),
      re_path(r'^inventarioview/$', views.InventorytListAll.as_view() ),
