@@ -222,13 +222,6 @@ class InventoriesList(APIView):
             return Response(datas)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-class InventoriesFList(APIView):
-    
-    def get(self, request, format=None):
-        queryset = Inventory.objects.filter(product_id.status = 'a')
-        serializer = InventorySerializer(queryset, many=True)
-        return Response(serializer.data)
-
 
 class InventoriesDetail(APIView):
     def get_object(self, id):
@@ -286,22 +279,7 @@ class InventoriesviewDetail(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class InventoriesPviewDetail(APIView):
-    def get_object(self, id):
-        try:
-            return Inventory.objects.get(product_id=id)
-        except Inventory.DoesNotExist:
-            return False
-    
-    def get(self, request, id, format=None):
-        example = self.get_object(product_id=id)
-        print(self)
-        if example != False:
-            serializer = InventoryviewSerializer(example)
-            print(serializer.data)
-            return Response(serializer.data)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+            
 
 #//////////////////////////////////////////////////////////////////////////////////////////////
 
