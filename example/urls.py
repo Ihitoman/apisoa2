@@ -37,7 +37,7 @@ urlpatterns = [
 
      re_path(r'^sales_lista/$', views.SalesList.as_view() ),
      re_path(r'^sales_detail/(?P<id>\d+)$', views.SaleDetail.as_view() ),
-     re_path(r'^canselar_venta/$', views.CancelSale.as_view() ),
+     re_path(r'^canselar_venta/(?P<id>\d+)$', views.CancelSale.as_view() ),
      re_path(r'^salesviewlista/$', views.SalesviewList.as_view() ),
      re_path(r'^notificaciones/$', views.NotificacionviewList.as_view() ),
      re_path(r'^solicitudcancelacion/$', views.NotificacionList.as_view() ),

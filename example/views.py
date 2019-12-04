@@ -146,7 +146,7 @@ class CancelSale(APIView):
             notificacioon = Notificacion.objects.get(pk=id)
             notificacioon.tipo = 'cancelado'
             venta = Sale.objects.get(notificacioon.sale_id)
-            venta.status = 0
+            venta.status = 'cancelado'
             venta.save()
             inventario = Inventory.objects.get(product_id = venta.product_id)
             inventario.quantity = inventario.quantity + venta.quantity
