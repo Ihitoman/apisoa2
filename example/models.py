@@ -61,3 +61,10 @@ class Sale(models.Model):
     class Meta:
         db_table = "sales"
 
+class Notificacion(models.Model):
+    user_id= models.ForeignKey(User, on_delete=models.SET(-1))
+    sale_id = models.ForeignKey(Sale, on_delete=models.SET(-1))
+    tipo = models.CharField(max_length=20, null=False)
+
+    class Meta:
+        db_table = "notificaciones"

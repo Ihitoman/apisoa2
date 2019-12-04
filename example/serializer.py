@@ -7,6 +7,7 @@ from example.models import Product
 
 from example.models import Inventory
 from example.models import Transaction
+from example.models import Notificacion
 
 from example.models import Sale
 
@@ -82,5 +83,19 @@ class SaleSerializer(serializers.ModelSerializer):
     #productoI = ProductidSerializer(many=True)
     class Meta:
         model = Sale
+        fields = ('__all__')
+
+class NotificacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notificacion
+        fields = ('__all__')
+
+class NotificacionViewSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user_id.username')
+    product = serializers.ReadOnlyField(source='sale_id.product_id.name')
+    total = serializers.ReadOnlyField(source='sale_id.total')
+    quantity = serializers.ReadOnlyField(source='sale_id.quantity')
+    class Meta:
+        model = Notificacion
         fields = ('__all__')
 

@@ -35,7 +35,9 @@ from example.serializer import TransactionSerializer
 from example.serializer import SaleSerializer
 from example.serializer import TransactionviewSerializer
 from example.serializer import SalesviewSerializer
-
+from example.models import Notificacion
+from example.serializer import NotificacionSerializer
+from example.serializer import NotificacionViewSerializer
 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -141,12 +143,15 @@ class CancelSale(APIView):
     def put(self, request, id, format=None):
         example = self.get_object(id)
         if example != False:
-            venta = Sale.objects.get(pk=id)
+            notificacioon = Notificacion.objects.get(pk=id)
+            notificacioon.tipo = 'cancelado'
+            venta = Sale.objects.get(notificacioon.sale_id)
             venta.status = 0
             venta.save()
             inventario = Inventory.objects.get(product_id = venta.product_id)
             inventario.quantity = inventario.quantity + venta.quantity
             inventario.save()
+
             return Response('Guardado')
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -381,9 +386,16 @@ class SalesList(APIView):
                 product_id = Product.objects.get(pk = id),
                 user_id = User.objects.get(pk=request.data['user_id'])
             )
+
             inventario.quantity = int(cantidadD) - int(cantidad)
             inventario.save()
             venta.save()
+            notificacioon = Notificacion.objects.create(
+                user_id = User.objects.get(pk=request.data['user_id']),
+                sale = venta,
+                tipo = "venta"
+            )
+            notificacioon.save()
             transaccion =Transaction.objects.create(
                 date = request.data['date'],
                 typee = "substraction",
@@ -439,4 +451,19 @@ class SaleDetail(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+class NotificacionviewList(APIView):
+    
+    def get(self, request, format=None):
+        queryset = Notificacion.objects.all()
+        serializer = NotificacionViewSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+class NotificacionList(APIView):
+    def post(self, request, format=None):
+        notificacioon = Notificacion.objects.create(
+            user_id = User.objects.get(pk = request.data['user_id']),
+            sale_id = Sale.objects.get(pk = request.data['sale_id']),
+            tipo = 'cancelacion'
+        )
+        return Response('Aceptado')
 

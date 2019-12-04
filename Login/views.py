@@ -6,6 +6,7 @@ from rest_framework.response import Response
 class CustomAuthToken(ObtainAuthToken):
     
     def post(self, request, *args, **kwargs):
+        print("entroooooooooooooooooooooooooooooooooooo")
         serializer = self.serializer_class(data = request.data,
         context = {'request':request}) 
         serializer.is_valid(raise_exception=True)
@@ -15,6 +16,5 @@ class CustomAuthToken(ObtainAuthToken):
         return Response({
             'token': token.key,
             'user_id': user.pk,
-            'username': user.username,
-            'is_superuser' : user.is_superuser
+            'username': user.username
         })
