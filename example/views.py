@@ -145,7 +145,7 @@ class CancelSale(APIView):
         if example != False:
             notificacioon = Notificacion.objects.get(pk=id)
             notificacioon.tipo = 'cancelado'
-            venta = Sale.objects.get(notificacioon.sale_id)
+            venta = Sale.objects.get(pk=notificacioon.sale_id)
             venta.status = 'cancelado'
             venta.save()
             inventario = Inventory.objects.get(product_id = venta.product_id)
@@ -481,10 +481,17 @@ class NotificacionviewList(APIView):
 
 class NotificacionList(APIView):
     def post(self, request, format=None):
-        notificacioon = Notificacion.objects.create(
-            user_id = User.objects.get(pk = request.data['user_id']),
-            sale_id = Sale.objects.get(pk = request.data['sale_id']),
-            tipo = 'cancelacion'
-        )
-        return Response('Aceptado')
+        try:
+            print('entro a try')
+            notificaciion = Notificacion.objects.get(sale_id = request.data['sale_id'])
+            print('deberia llegar')
+            return Response('ya existe solicitud')
+        except:
+            print('no we :()')
+            notificacioon = Notificacion.objects.create(
+                user_id = User.objects.get(pk = request.data['user_id']),
+                sale_id = Sale.objects.get(pk = request.data['sale_id']),
+                tipo = 'cancelacion'
+            )
+            return Response('Aceptado')
 
