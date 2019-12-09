@@ -63,7 +63,7 @@ class Sale(models.Model):
 
 class Notificacion(models.Model):
     user_id= models.ForeignKey(User, on_delete=models.SET(-1))
-    sale_id = models.OneToOneField(Sale, on_delete=models.SET(-1))
+    sale_id = models.ForeignKey(Sale, on_delete=models.SET(-1), unique=True)
     tipo = models.CharField(max_length=20, null=False)
 
     class Meta:
