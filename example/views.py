@@ -80,7 +80,7 @@ class ProductsList(APIView):
             user_id = User.objects.get(pk=id)
         )
         postTransaction = Transaction.objects.create(
-            date = '2019-10-18',
+            date = '2019-12-09',
             typee = "add",
             inventory_id = postInventario
         )
@@ -380,7 +380,7 @@ class SalesList(APIView):
                 quantity = cantidad,
                 discount = request.data['discount'],
                 total = request.data['total'],
-                date = '2019-10-18',
+                date = request.data['date'],
                 status = request.data['status'],
                 paymaneth_method = request.data['paymaneth_method'],
                 product_id = Product.objects.get(pk = id),
@@ -390,9 +390,10 @@ class SalesList(APIView):
             inventario.quantity = int(cantidadD) - int(cantidad)
             inventario.save()
             venta.save()
+            print("/////////////////////////////////////")
             notificacioon = Notificacion.objects.create(
                 user_id = User.objects.get(pk=request.data['user_id']),
-                sale = venta,
+                sale_id = venta,
                 tipo = "venta"
             )
             notificacioon.save()
