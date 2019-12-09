@@ -452,6 +452,26 @@ class SaleDetail(APIView):
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
+class notiDetail(APIView):
+    def get_object(self, id):
+        try:
+            return Notificacion.objects.get(pk=id)
+        except Notificacion.DoesNotExist:
+            return False
+
+    def get(self, request, id, format=None):
+        example = self.get_object(id)
+        if example != False:
+            serializer = NotificacionSerializer(example)
+            return Response(serializer.data)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, id, format=None):
+        Notificacion.objects.get(pk=id).delete()
+        return Response("ok")
+
 class NotificacionviewList(APIView):
     
     def get(self, request, format=None):

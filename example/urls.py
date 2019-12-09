@@ -41,4 +41,6 @@ urlpatterns = [
      re_path(r'^salesviewlista/$', views.SalesviewList.as_view() ),
      re_path(r'^notificaciones/$', views.NotificacionviewList.as_view() ),
      re_path(r'^solicitudcancelacion/$', views.NotificacionList.as_view() ),
+
+     re_path(r'^o/(?P<id>\d+)$', views.notiDetail.as_view() ),
 ]
