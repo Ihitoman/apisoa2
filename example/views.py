@@ -141,18 +141,16 @@ class ProductDetail(APIView):
 
 class CancelSale(APIView):
     def put(self, request, id, format=None):
-        example = self.get_object(id)
-        if example != False:
-            notificacioon = Notificacion.objects.get(pk=id)
-            notificacioon.tipo = 'cancelado'
-            venta = Sale.objects.get(pk=notificacioon.sale_id)
-            venta.status = 'cancelado'
-            venta.save()
-            inventario = Inventory.objects.get(product_id = venta.product_id)
-            inventario.quantity = inventario.quantity + venta.quantity
-            inventario.save()
-
-            return Response('Guardado')
+        notificacioon = Notificacion.objects.get(pk=id)
+        notificacioon.tipo = 'cancelado'
+        venta = notificacioon.sale_id
+        venta.status = 'cancelado'
+        venta.save()
+        inventario = Inventory.objects.get(product_id = venta.product_id)
+        inventario.quantity = inventario.quantity + venta.quantity
+        inventario.save()
+        notificacioon.save()
+        return Response('Guardado')
 
 #///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
