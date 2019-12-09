@@ -8,6 +8,7 @@ from example.models import Product
 from example.models import Inventory
 from example.models import Transaction
 from example.models import Notificacion
+from example.models import Sesion
 
 from example.models import Sale
 
@@ -98,4 +99,16 @@ class NotificacionViewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notificacion
         fields = ('__all__')
+
+class SesionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sesion
+        fields = ('__all__')
+
+class SesionviewSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user_id.username')
+    class Meta:
+        model = Sesion
+        fields = ('__all__')
+
 

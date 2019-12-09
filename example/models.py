@@ -69,3 +69,10 @@ class Notificacion(models.Model):
     class Meta:
         db_table = "notificaciones"
 
+class Sesion(models.Model):
+    user_id = models.ForeignKey(User, on_delete=models.SET(-1))
+    status = models.CharField(max_length=20, null=False)
+    
+    class Meta:
+        db_table = "sesiones"
+

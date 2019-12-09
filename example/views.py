@@ -18,6 +18,7 @@ import time
 
 from example.models import User2
 from example.models import Product
+from example.models import Sesion
 
 from example.models import Transaction
 from example.models import Sale
@@ -38,6 +39,8 @@ from example.serializer import SalesviewSerializer
 from example.models import Notificacion
 from example.serializer import NotificacionSerializer
 from example.serializer import NotificacionViewSerializer
+from example.serializer import SesionSerializer
+from example.serializer import SesionviewSerializer
 
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
@@ -493,3 +496,17 @@ class NotificacionList(APIView):
             )
             return Response('Aceptado')
 
+class SesionList(APIView):
+    
+    def get(self, request, format=None):
+        queryset = Sesion.objects.all()
+        serializer = SesionviewSerializer(queryset, context={'request': request}, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = SesionSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            datas = serializer.data
+            return Response(datas)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
