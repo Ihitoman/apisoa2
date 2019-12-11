@@ -481,20 +481,29 @@ class NotificacionviewList(APIView):
         return Response(serializer.data)
 
 class NotificacionList(APIView):
-    def post(self, request, format=None):
-        try:
-            print('entro a try')
-            notificaciion = Notificacion.objects.get(sale_id = request.data['sale_id'])
-            print('deberia llegar')
-            return Response('ya existe solicitud')
-        except:
-            print('no we :()')
-            notificacioon = Notificacion.objects.create(
-                user_id = User.objects.get(pk = request.data['user_id']),
-                sale_id = Sale.objects.get(pk = request.data['sale_id']),
-                tipo = 'cancelacion'
-            )
-            return Response('Aceptado')
+    def put(self, request, id, format=None):
+        #try:
+        #     print('entro a try')
+        #     notificaciion = Notificacion.objects.get(sale_id = request.data['sale_id'])
+        #     print('deberia llegar')
+        #     return Response('ya existe solicitud')
+        # except:
+        #     print('no we :()')
+        #     notificacioon = Notificacion.objects.create(
+        #         user_id = User.objects.get(pk = request.data['user_id']),
+        #         sale_id = Sale.objects.get(pk = request.data['sale_id']),
+        #         tipo = 'cancelacion'
+        #     )
+        #     return Response('Aceptado')
+        notificaciion = Notificacion.objects.get(pk=request.data['id'])
+        notificaciion.tipo = 'cancelacion'
+        return Response('Aceptado')
+
+class NoaList(APIView):
+    def put(self, request, id, format=None):
+        notificaciion = Notificacion.objects.get(pk=request.data['id'])
+        notificaciion.tipo = 'venta'
+        return Response('ok')
 
 class SesionList(APIView):
     

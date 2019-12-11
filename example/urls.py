@@ -40,8 +40,9 @@ urlpatterns = [
      re_path(r'^canselar_venta/(?P<id>\d+)$', views.CancelSale.as_view() ),
      re_path(r'^salesviewlista/$', views.SalesviewList.as_view() ),
      re_path(r'^notificaciones/$', views.NotificacionviewList.as_view() ),
-     re_path(r'^solicitudcancelacion/$', views.NotificacionList.as_view() ),
+     re_path(r'^solicitudcancelacion/(?P<id>\d+)$', views.NotificacionList.as_view() ),
      re_path(r'^sesiones/$', views.SesionList.as_view() ),
+     re_path(r'^rechazar/(?P<id>\d+)$', views.NoaList.as_view() ),
 
      re_path(r'^o/(?P<id>\d+)$', views.notiDetail.as_view() ),
 ]
