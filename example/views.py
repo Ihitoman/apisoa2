@@ -174,8 +174,8 @@ class UsersList(APIView):
                 user.is_superuser = False
             user.save()
             #serializer.save()
-            datas = serializer.data
-            return Response(datas)
+            #datas = serializer.data
+            return Response('Aceptado')
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 
