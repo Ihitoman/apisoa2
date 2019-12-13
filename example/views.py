@@ -497,12 +497,14 @@ class NotificacionList(APIView):
         #     return Response('Aceptado')
         notificaciion = Notificacion.objects.get(pk=id)
         notificaciion.tipo = 'cancelacion'
+        notificaciion.save()
         return Response('Aceptado')
 
 class NoaList(APIView):
     def put(self, request, id, format=None):
         notificaciion = Notificacion.objects.get(pk=id)
         notificaciion.tipo = 'venta'
+        notificaciion.save()
         return Response('ok')
 
 class SesionList(APIView):
