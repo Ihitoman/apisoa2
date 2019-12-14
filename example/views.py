@@ -51,6 +51,13 @@ from rest_framework.response import Response
 
 
 #delete
+class cambiarP(APIView):
+    def put (self, request, id,format=None):
+        usuario = User.objects.get(pk=id)
+        usuario.set_password(request.data['password'])
+        usuario.save()
+        return Response('ok')
+
 
 class ProductsList(APIView):
     
@@ -189,7 +196,7 @@ class UserDetail(APIView):
     def get(self, request, id, format=None):
         example = self.get_object(id)
         if example != False:
-            serializer = UserSerializer(example)
+            serializer = UserSerializer(example, context={'request': request})
             return Response(serializer.data)
         else:
             return Response(status=status.HTTP_400_BAD_REQUEST)
