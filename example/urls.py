@@ -43,7 +43,9 @@ urlpatterns = [
      re_path(r'^solicitudcancelacion/(?P<id>\d+)$', views.NotificacionList.as_view() ),
      re_path(r'^sesiones/$', views.SesionList.as_view() ),
      re_path(r'^rechazar/(?P<id>\d+)$', views.NoaList.as_view() ),
-     re_path(r'^cambiarc/(?P<id>\d+)$', views.cambiarP.as_view() ),
+     re_path(r'^cambiarpass/(?P<id>\d+)$', views.cambiarP.as_view() ),
+     re_path(r'^cambiaremail/(?P<id>\d+)$', views.cambiarCorreo.as_view() ),
+     re_path(r'^buscarid/(?P<username>[\w\-]+)$', views.buscarId.as_view() ),
 
      re_path(r'^o/(?P<id>\d+)$', views.notiDetail.as_view() ),
 ]

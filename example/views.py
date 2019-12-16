@@ -58,6 +58,18 @@ class cambiarP(APIView):
         usuario.save()
         return Response('ok')
 
+class cambiarCorreo(APIView):
+    def put (self, request, id,format=None):
+        usuario = User.objects.get(pk=id)
+        usuario.email = request.data['email']
+        usuario.save()
+        return Response('ok')
+
+class buscarId(APIView):
+    def put(self, request, username, format=None):
+        usuarioo = User.objects.get(username = username)
+        return Response(usuarioo.email)
+
 
 class ProductsList(APIView):
     
