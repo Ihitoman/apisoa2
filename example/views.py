@@ -196,6 +196,7 @@ class UsersList(APIView):
                 user_id = user,
                 status = 'add'
             )
+            sesioon.save()
             #serializer.save()
             #datas = serializer.data
             return Response('Aceptado')
