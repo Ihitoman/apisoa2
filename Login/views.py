@@ -1,6 +1,7 @@
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from example.models import Sesion
 
 
 class CustomAuthToken(ObtainAuthToken):
@@ -12,7 +13,11 @@ class CustomAuthToken(ObtainAuthToken):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
-
+        sesioon = Sesion.objects.create(
+            user_id = user,
+            status = 'exitoso'
+        )
+        sesioon.save()
         return Response({
             'token': token.key,
             'user_id': user.pk,
