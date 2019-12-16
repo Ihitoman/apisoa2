@@ -192,6 +192,10 @@ class UsersList(APIView):
             else:
                 user.is_superuser = False
             user.save()
+            sesioon = Sesion.objects.create(
+                user_id = user,
+                status = 'add'
+            )
             #serializer.save()
             #datas = serializer.data
             return Response('Aceptado')
